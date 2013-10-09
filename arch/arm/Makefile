@@ -234,7 +234,7 @@ endif
 machdirs := $(patsubst %,arch/arm/mach-%/,$(machine-y))
 platdirs := $(patsubst %,arch/arm/plat-%/,$(plat-y))
 
-include $(srctree)/mediatek/Makefile
+include $(srctree)/mediatek/build/Makefile
 
 
 ifeq ($(KBUILD_SRC),)

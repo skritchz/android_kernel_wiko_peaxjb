@@ -1,5 +1,7 @@
 #!/bin/bash
 # Default settings
+#set -x
+
 verfile="android.ver"
 curcfg=".config"
 release="n"
@@ -55,7 +57,7 @@ while test -n "$1"; do
     shift
 done
 
-source ../mediatek/build/shell.sh ../ kernel
+source mediatek/build/shell.sh . kernel/ 
 defcfg="${MTK_ROOT_GEN_CONFIG}/kconfig"
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then

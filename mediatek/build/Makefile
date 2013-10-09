@@ -95,6 +95,7 @@ $(call relative-include,libs/gmsl)        # basic library: GNU GMSL + MTK extend
 $(call relative-include,libs/definitions.mk)   # common functions : Functions used in MTK build extension
 $(call relative-include,libs/custom.mk)   # custom rules : Functions for custom folders
 $(call relative-include,libs/config.mk)   # config rules : Functions for config generation
+$(call relative-include,kernel/Makefile)
 
 # let makefiles included in this makefile be invisible to all later makefiles
 $(_relative_dir_depth_)/_:=
