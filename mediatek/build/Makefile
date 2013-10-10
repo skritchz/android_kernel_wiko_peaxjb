@@ -70,7 +70,7 @@ $(eval $(if $(4),$(eval _4:=$(4)),$(eval _4:=$(FULL_PROJECT)))) \
 $(eval $(if $(2),$(eval _2:=$(2)/),$(eval _2:=$(call to-root)))) \
 $(eval $(if $(1),$(eval _1:=/$(1)),$(eval _1:=/$(call from-root)))) \
 $(eval TO_ROOT := $(_2)) \
-$(eval MTK_ROOT := $(_2)mediatek) \
+$(eval MTK_ROOT := $(srctree)/mediatek) \
 $(eval MTK_ROOT_PLATFORM := $(MTK_ROOT)/platform/$(_3)) \
 $(eval MTK_ROOT_BUILD := $(MTK_ROOT)/build) \
 $(eval MTK_ROOT_SOURCE = $(MTK_ROOT)) \
@@ -91,11 +91,11 @@ $(eval export MTK_PATH_PLATFORM MTK_PATH_BUILD MTK_PATH_SOURCE MTK_PATH_CUSTOM M
 endef
 
 # include individual functionality from separate makefiles.
-$(call relative-include,libs/gmsl)        # basic library: GNU GMSL + MTK extended Lib (GMEL)
-$(call relative-include,libs/definitions.mk)   # common functions : Functions used in MTK build extension
-$(call relative-include,libs/custom.mk)   # custom rules : Functions for custom folders
-$(call relative-include,libs/config.mk)   # config rules : Functions for config generation
-$(call relative-include,kernel/Makefile)
+$(eval include $(srctree)/mediatek/build/libs/gmsl)        # basic library: GNU GMSL + MTK extended Lib (GMEL)
+$(eval include $(srctree)/mediatek/build/libs/definitions.mk)   # common functions : Functions used in MTK build extension
+$(eval include $(srctree)/mediatek/build/libs/custom.mk)   # custom rules : Functions for custom folders
+$(eval include $(srctree)/mediatek/build/libs/config.mk)   # config rules : Functions for config generation
+$(eval include $(srctree)/mediatek/build/kernel/Makefile)
 
 # let makefiles included in this makefile be invisible to all later makefiles
 $(_relative_dir_depth_)/_:=

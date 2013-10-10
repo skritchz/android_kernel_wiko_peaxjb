@@ -1,6 +1,6 @@
 #!/bin/bash
 # Default settings
-#set -x
+set -x
 
 verfile="android.ver"
 curcfg=".config"
@@ -57,8 +57,7 @@ while test -n "$1"; do
     shift
 done
 
-source mediatek/build/shell.sh . kernel/ 
-defcfg="${MTK_ROOT_GEN_CONFIG}/kconfig"
+KBUILD_OUTPUT_SUPPORT=yes
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ];then
   outdir=$curdir/out
@@ -99,7 +98,6 @@ fi
 
 if [ "${rebuild}" == "y" ]; then make_clean; fi
 
-echo "**** Configuring / $defcfg / ****"
 # select correct configuration file
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
   make mediatek-configs O=$outdir
