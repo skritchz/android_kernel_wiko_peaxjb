@@ -173,7 +173,7 @@ if [ $? -ne 0 ]; then exit 1; fi
 
 echo "**** Successfully built kernel ****"
 
-mkimg="${MTK_ROOT_BUILD}/tools/mkimage"
+mkimg="./mediatek/build/tools/mkimage"
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
   kernel_img="${outdir}/arch/arm/boot/Image"
   kernel_zimg="${outdir}/arch/arm/boot/zImage"
@@ -186,19 +186,19 @@ echo "**** Generate download images ****"
 
 if [ ! -x ${mkimg} ]; then chmod a+x ${mkimg}; fi
 
-if [ -d ../build_result ]; then
-    rm -rf ../build_result
+if [ -d build_result ]; then
+    rm -rf build_result
 fi
-mkdir -p ../build_result/system/lib/modules/
+mkdir -p build_result/system/lib/modules/
 
 if [ "${KBUILD_OUTPUT_SUPPORT}" == "yes" ]; then
-  ${mkimg} ${kernel_zimg} KERNEL > ../build_result/kernel_${MTK_PROJECT}.bin
+  ${mkimg} ${kernel_zimg} KERNEL > build_result/kernel_${MTK_PROJECT}.bin
   
 else
-  ${mkimg} ${kernel_zimg} KERNEL > ../build_result/kernel_${MTK_PROJECT}.bin
+  ${mkimg} ${kernel_zimg} KERNEL > build_result/kernel_${MTK_PROJECT}.bin
 fi
 
 for file in $(find . -name *.ko); do
- cp $file ../build_result/system/lib/modules/
+ cp $file build_result/system/lib/modules/
 done
 
